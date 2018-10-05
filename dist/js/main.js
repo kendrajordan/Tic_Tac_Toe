@@ -1,83 +1,66 @@
 let buttons = document.getElementsByClassName("card");
 let message = document.getElementById("message");
 let turn = 0;
-let symbols = ['O','X'];
-
+let symbols = ['O', 'X'];
 
 document.onreadystatechange = function () {
-    if (document.readyState == "interactive") {
-      document.getElementById('reset').onclick = startGame;
+  if (document.readyState == "interactive") {
+    document.getElementById('reset').onclick = startGame;
     startGame();
-    }
-  };
+  }
+};
 
-function somebodyWon(){
+function somebodyWon() {
   //Spaces:
   // 0 1 2
   // 3 4 5
   // 6 7 8
   //Is this the last turn? If so, and no win, then game is over and its a draw
-  return(
-    checkLineForWin([0,1,2]) ||
-    checkLineForWin([3,4,5]) ||
-    checkLineForWin([6,7,8]) ||
-    checkLineForWin([0,3,6]) ||
-    checkLineForWin([1,4,7]) ||
-    checkLineForWin([2,5,8]) ||
-    checkLineForWin([0,4,8]) ||
-    checkLineForWin([2,4,6])
-  );
+  return checkLineForWin([0, 1, 2]) || checkLineForWin([3, 4, 5]) || checkLineForWin([6, 7, 8]) || checkLineForWin([0, 3, 6]) || checkLineForWin([1, 4, 7]) || checkLineForWin([2, 5, 8]) || checkLineForWin([0, 4, 8]) || checkLineForWin([2, 4, 6]);
 }
 
-function checkLineForWin(line){
+function checkLineForWin(line) {
   //Should return T or F
   //login for checking whether there are all X. or all Os on the given line
 
   let first = buttons[line[0]].innerHTML;
   if (first != '' && first == buttons[line[1]].innerHTML && first == buttons[line[2]].innerHTML) {
-      return true;
+    return true;
   }
   return false;
 }
 
-
-function startGame(){
-  turn =0;
-message.innerHTML = 'Now it is ' + symbols[(turn+1) % 2 ] + ' turn';
-for (let i=0; i < buttons.length ; i++){
-//Blank out the innerHTML for the spaces
-buttons[i].addEventListener('click',takeSpace);
-buttons[i].innerHTML='';
+function startGame() {
+  turn = 0;
+  message.innerHTML = 'Now it is ' + symbols[(turn + 1) % 2] + ' turn';
+  for (let i = 0; i < buttons.length; i++) {
+    //Blank out the innerHTML for the spaces
+    buttons[i].addEventListener('click', takeSpace);
+    buttons[i].innerHTML = '';
   }
 }
-function takeSpace(){
+function takeSpace() {
   turn++;
 
   this.innerHTML = symbols[turn % 2];
-  this.removeEventListener('click',takeSpace);
+  this.removeEventListener('click', takeSpace);
 
-  if (somebodyWon()){
-    message.innerHTML = symbols[turn %2 ] + ' won! Yay!';
+  if (somebodyWon()) {
+    message.innerHTML = symbols[turn % 2] + ' won! Yay!';
     removeClicksFromSpaces();
-  }else if (turn ==9) {
-    message.innerHTML=message.innerHTML="It is a draw! Please play again.";
+  } else if (turn == 9) {
+    message.innerHTML = message.innerHTML = "It is a draw! Please play again.";
     removeClicksFromSpaces();
-  }
-  else{
-    message.innerHTML = "It is " +symbols[(turn + 1) % 2 ] + "'s turn!'";
+  } else {
+    message.innerHTML = "It is " + symbols[(turn + 1) % 2] + "'s turn!'";
   }
 }
 
-function removeClicksFromSpaces(){
-  for(let i=0; i< buttons.length; i++){
+function removeClicksFromSpaces() {
+  for (let i = 0; i < buttons.length; i++) {
     buttons[i].removeEventListener('click', takeSpace);
   }
 }
-
-
-
-
-
 
 /*
 let top_left=document.getElementById('box-top-left');

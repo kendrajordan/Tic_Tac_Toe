@@ -1,2 +1,40 @@
 // Bootstrap and its default variables
 @import "../../node_modules/bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Monoton');
+$aztec-gold: #A99956;
+$rich-black:#050505;
+$bistre:#362720;
+$independence:#4E5367;
+$rosewood:#650207;
+.card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  font-family: 'Monoton', cursive;;
+  font-size: 4rem;
+  background-color: $rich-black;
+  color:$aztec-gold;
+
+}
+body{
+  background-color: $aztec-gold;
+}
+.border-right{
+  border-right:2px $aztec-gold;
+}
+.border-bottom{
+  border-bottom: 2px $aztec-gold;
+}
+h1{
+  text-align: center;
+}
+.row{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+a{
+  text-decoration: none;
+background-color: transparent;
+}
